@@ -1,13 +1,18 @@
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose"); // Change "Mongoose" to "mongoose" (lowercase)
 require("dotenv").config();
 
-Mongoose.set('strictQuery', false);
+// mongoose.set('strictQuery', false); // Correct method is mongoose.set, not Mongoose.set
 
 const connectDB = async () => {
-  await Mongoose.connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  console.log("Connection SuccessFul !!!");
-}
-module.exports = connectDB
+  try {
+    await mongoose.connect(process.env.DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connection Successful !!!");
+  } catch (error) {
+    console.error("Connection failed:", error);
+  }
+};
+
+module.exports = connectDB;
