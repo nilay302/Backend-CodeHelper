@@ -114,12 +114,16 @@ async function getTags(codeforcesHandle, rank) {
       req_problem_tags.push('dp', 'graphs', 'trees', 'dfs and similar');
     }
 
+    // console.log(req_problem_tags);
+
     for (const tag of req_problem_tags) {
       weakTags[tag] = await getProblems(tag, rank, min_rating, max_rating);
       if (Object.keys(weakTags).length === 7) {
         break;
       }
     }
+
+    // console.log(weakTags);
 
     return weakTags;
   } catch (error) {
@@ -137,14 +141,17 @@ function getRandomInt(min, max) {
 async function getProblems(tag, rank, min_rating, max_rating) {
   try {
     const response = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${tag}`);
+    // console.log(response.data);
     const allData = response.data.result;
     const allProblems = allData.problems;
     const allproblemStatistics = allData.problemStatistics;
 
     let count = 0;
     const lengthOfProblemSet = allProblems.length;
-    const alreadySuggested = {};
+    var alreadySuggested = {};
     var problems = [];
+
+    // console.log(tag);
 
     for (let j = 0; j < lengthOfProblemSet; j++) {
       let i = getRandomInt(0, lengthOfProblemSet - 1);
@@ -153,12 +160,23 @@ async function getProblems(tag, rank, min_rating, max_rating) {
         continue;
       }
 
-      if (tag in allProblems[i].tags &&
+      // console.log("YAHA");
+
+      
+      var f = false;
+      for(let k = 0; k < allProblems[i].tags.length; k++) {
+        // console.log(allProblems[i].tags[k] + " " + tag);
+        if((String)(allProblems[i].tags[k]) == String(tag)) f = true;
+      }
+      // console.log(tag + " "  + allProblems[i].tags + " " + f);
+
+      if (f &&
           !alreadySuggested[allProblems[i].name] &&
           !completedProblems[allProblems[i].name] &&
           allProblems[i].rating >= min_rating &&
           allProblems[i].rating <= max_rating) {
         alreadySuggested[allProblems[i].name] = 1;
+        // console.log("Inside");
         problems.push([allProblems[i].name, `https://codeforces.com/problemset/problem/${allProblems[i].contestId}/${allProblems[i].index}`]);
         count++;
       }
