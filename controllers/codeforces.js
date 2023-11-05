@@ -21,7 +21,7 @@ module.exports.getProfile = async (req, res) => {
 module.exports.getTags = async (req, res) => {
 
     try {
-        // console.log((Number)(req.body.rank));
+        console.log((Number)(req.body.rank) + " " + req.query.codeforces);
         const weakTags = await codeforcesModule.getTags(req.query.codeforces, (Number)(req.query.rank));
         return res.status(200).json({
             content: weakTags
