@@ -1,21 +1,29 @@
 const leetcodeModule = require('./../utils/leetcode');
 
-// module.exports.getProfile = async (req, res) => {
+module.exports.getRating = async (req, res) => {
 
-//     try {
+    try {
+        // console.log((Number)(req.body.rank));
 
-//         const userDetails = await leetcodeModule.userDetails(req.body.leetcode, true);
-//         return res.status(200).json({
-//             content: userDetails
-//         });
+        console.log(req.query);
 
-//     } catch (error) {
-//         res.status(500).json({
-//             description: 'User profile could not be retrieved due to unexpected error ' + `${error.message}`
-//         });
-//     }
+        const rating = await leetcodeModule.getRating(req.query.leetcode);
 
-// }
+        
+
+        // const weakTags = await leetcodeModule.get_problems((Number)(rating));
+        console.log(rating);
+        return res.status(200).json({
+            content: rating
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            description: 'User rating could not be retrieved due to unexpected error ' + `${error.message}`
+        });
+    }
+
+}
 
 module.exports.getTags = async (req, res) => {
 
