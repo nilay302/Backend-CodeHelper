@@ -22,9 +22,9 @@ module.exports.getTags = async (req, res) => {
     try {
         // console.log((Number)(req.body.rank));
 
-        console.log(req.params.leetcode);
+        console.log(req.query);
 
-        const rating = await leetcodeModule.getRating(req.params.leetcode);
+        const rating = await leetcodeModule.getRating(req.query.leetcode);
 
         
 

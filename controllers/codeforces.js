@@ -4,7 +4,8 @@ module.exports.getProfile = async (req, res) => {
 
     try {
 
-        const userDetails = await codeforcesModule.userDetails(req.params.codeforces, true);
+        console.log(req.params.codeforces);
+        const userDetails = await codeforcesModule.userDetails(req.query.codeforces, true);
         return res.status(200).json({
             content: userDetails
         });
@@ -21,7 +22,7 @@ module.exports.getTags = async (req, res) => {
 
     try {
         // console.log((Number)(req.body.rank));
-        const weakTags = await codeforcesModule.getTags(req.params.codeforces, (Number)(req.params.rank));
+        const weakTags = await codeforcesModule.getTags(req.query.codeforces, (Number)(req.query.rank));
         return res.status(200).json({
             content: weakTags
         });
