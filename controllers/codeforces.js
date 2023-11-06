@@ -1,4 +1,5 @@
 const codeforcesModule = require('./../utils/codeforces');
+const analysisModule = require('./../utils/cf-visualizer');
 
 module.exports.getProfile = async (req, res) => {
 
@@ -25,6 +26,24 @@ module.exports.getTags = async (req, res) => {
         const weakTags = await codeforcesModule.getTags(req.query.codeforces, (Number)(req.query.rank));
         return res.status(200).json({
             content: weakTags
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            description: 'User profile could not be retrieved due to unexpected error ' + `${error.message}`
+        });
+    }
+
+}
+
+module.exports.getAnalysis = async (req, res) => {
+
+    try {
+        const url = "https://cfviz.netlify.app/";
+        const username = req.query.codeforces;
+        const htmlPage = await analysisModule.scrapeWebPage(url, username);
+        return res.status(200).json({
+            content: htmlPage
         });
 
     } catch (error) {
