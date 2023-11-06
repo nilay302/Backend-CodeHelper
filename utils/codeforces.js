@@ -90,25 +90,25 @@ async function getTags(codeforcesHandle, rank) {
 
     var req_problem_tags = sortedTags.slice(0, 2);
     var weakTags = {};
-    var min_rating = rank - 100;
-    var max_rating = rank + 300;
+    var min_rating = (Number)(rank) - 100;
+    var max_rating = (Number)(rank) + 300;
 
-    if (rank < 1000) {
+    if ((Number)(rank) < 1000) {
       req_problem_tags.push('brute force', 'sorting', 'math');
     }
-    if (rank < 1200) {
+    if ((Number)(rank) < 1200) {
       req_problem_tags.push('sorting', 'math', 'greedy', 'implementation', 'constructive algorithms');
-    } else if (rank < 1400) {
+    } else if ((Number)(rank) < 1400) {
       req_problem_tags.push('number theory', 'greedy', 'constructive algorithms', 'binary search');
-    } else if (rank < 1600) {
+    } else if ((Number)(rank) < 1600) {
       req_problem_tags.push('strings', 'binary search', 'dp', 'combinatorics');
-    } else if (rank < 1900) {
+    } else if ((Number)(rank) < 1900) {
       req_problem_tags.push('dp', 'graphs', 'trees', 'dfs and similar');
-    } else if (rank < 2100) {
+    } else if ((Number)(rank) < 2100) {
       req_problem_tags.push('dp', 'graphs', 'trees', 'dfs and similar');
-    } else if (rank < 2400) {
+    } else if ((Number)(rank) < 2400) {
       req_problem_tags.push('dp', 'graphs', 'fft', 'geometry');
-    } else if (rank < 2600) {
+    } else if ((Number)(rank) < 2600) {
       req_problem_tags.push('dp', 'graphs', 'trees', 'dfs and similar');
     } else {
       req_problem_tags.push('dp', 'graphs', 'trees', 'dfs and similar');
