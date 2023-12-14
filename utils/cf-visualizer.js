@@ -1,30 +1,30 @@
 const puppeteer = require('puppeteer');
 
-// const getQuotes = async () => {
-//   // Start a Puppeteer session with:
-//   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
-//   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
-//   const browser = await await puppeteer.launch({
-//     executablePath: '/usr/bin/chromium-browser'
-//   })
+// // const getQuotes = async () => {
+// //   // Start a Puppeteer session with:
+// //   // - a visible browser (`headless: false` - easier to debug because you'll see the browser in action)
+// //   // - no default viewport (`defaultViewport: null` - website page will in full width and height)
+// //   const browser = await await puppeteer.launch({
+// //     executablePath: '/usr/bin/chromium-browser'
+// //   })
 
-//   // Open a new page
-//   const page = await browser.newPage();
+// //   // Open a new page
+// //   const page = await browser.newPage();
 
-//   // On this new page:
-//   // - open the "http://quotes.toscrape.com/" website
-//   // - wait until the dom content is loaded (HTML is ready)
-//   await page.goto("http://quotes.toscrape.com/", {
-//     waitUntil: "domcontentloaded",
-//   });
-// };
+// //   // On this new page:
+// //   // - open the "http://quotes.toscrape.com/" website
+// //   // - wait until the dom content is loaded (HTML is ready)
+// //   await page.goto("http://quotes.toscrape.com/", {
+// //     waitUntil: "domcontentloaded",
+// //   });
+// // };
 
-// // Start the scraping
-// getQuotes();
+// // // Start the scraping
+// // getQuotes();
 
 async function scrapeWebPage(url, username) {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: null,
   }); // Launch a headless browser
   const page = await browser.newPage();      // Create a new page
@@ -47,6 +47,8 @@ async function scrapeWebPage(url, username) {
 
   return htmlContent;
 }
+
+// scrapeWebPage('https://cfviz.netlify.app/', 'ravikjha7');
 
 // Usage
 module.exports = {
